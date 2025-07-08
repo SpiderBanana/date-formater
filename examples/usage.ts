@@ -1,9 +1,4 @@
-// Exemple d'utilisation du package publié sur npm
-
 import { formatDate } from '@spiderbanana/date-smart-formatter';
-// Si tu testes localement avant publication, tu peux utiliser :
-// import { formatDate } from '../dist';
-// après avoir fait `npm run build`
 
 console.log('=== Exemples basiques ===');
 const now = new Date();

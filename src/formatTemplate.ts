@@ -72,14 +72,14 @@ export function formatTemplate(
   // Apply replacements one by one using a unique placeholder approach
   let result = template;
   const placeholderMap = new Map<string, string>();
-  
+
   for (let i = 0; i < replacements.length; i++) {
     const { pattern, replacement } = replacements[i];
     const placeholder = `__TEMP_PLACEHOLDER_${i}__`;
     placeholderMap.set(placeholder, replacement);
     result = result.split(pattern).join(placeholder);
   }
-  
+
   // Replace all placeholders with actual values
   for (const [placeholder, replacement] of placeholderMap) {
     result = result.split(placeholder).join(replacement);

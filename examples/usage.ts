@@ -2,7 +2,7 @@
 
 import { formatDate } from '@spiderbanana/date-smart-formatter';
 // Si tu testes localement avant publication, tu peux utiliser :
-// import { formatDate } from '../dist'; 
+// import { formatDate } from '../dist';
 // après avoir fait `npm run build`
 
 console.log('=== Exemples basiques ===');
@@ -51,11 +51,23 @@ console.log('ISO string:', formatDate('2024-01-15T14:30:00Z'));
 console.log('Timestamp:', formatDate(1705334400000));
 
 console.log('\n=== Smart labels multilingues ===');
-console.log('FR - Aujourd\'hui:', formatDate(new Date(), { useSmartLabels: true, locale: 'fr-FR' }));
-console.log('EN - Today:', formatDate(new Date(), { useSmartLabels: true, locale: 'en-US' }));
-console.log('DE - Heute:', formatDate(new Date(), { useSmartLabels: true, locale: 'de-DE' }));
+console.log(
+  "FR - Aujourd'hui:",
+  formatDate(new Date(), { useSmartLabels: true, locale: 'fr-FR' }),
+);
+console.log(
+  'EN - Today:',
+  formatDate(new Date(), { useSmartLabels: true, locale: 'en-US' }),
+);
+console.log(
+  'DE - Heute:',
+  formatDate(new Date(), { useSmartLabels: true, locale: 'de-DE' }),
+);
 
 console.log('\n=== Templates avancés ===');
-console.log('Date complète:', formatDate(now, { format: 'dddd DD MMMM YYYY à HH:mm:ss' }));
+console.log(
+  'Date complète:',
+  formatDate(now, { format: 'dddd DD MMMM YYYY à HH:mm:ss' }),
+);
 console.log('Format 12h:', formatDate(now, { format: 'DD/MM/YYYY h:mm A' }));
 console.log('Format court:', formatDate(now, { format: 'D/M/YY' }));

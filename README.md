@@ -14,7 +14,7 @@ Un formateur de dates intelligent avec support multi-locales et smart labels (Au
 ## 🚀 Installation
 
 ```bash
-npm install @votre-nom-npm/date-smart-formatter
+npm install @spiderbanana/date-smart-formatter
 ```
 
 ## 📖 Usage
@@ -22,7 +22,7 @@ npm install @votre-nom-npm/date-smart-formatter
 ### Usage basique
 
 ```typescript
-import { formatDate } from '@votre-nom-npm/date-smart-formatter';
+import { formatDate } from '@spiderbanana/date-smart-formatter';
 
 // Format par défaut (français)
 formatDate(new Date()); // "08/07/2025"
@@ -104,7 +104,7 @@ import {
   localizeDate,
   formatTemplate,
   handleTimezone,
-} from '@votre-nom-npm/date-smart-formatter';
+} from '@spiderbanana/date-smart-formatter';
 
 // Parser une date
 const parsed = parseDate('15/01/2024');
@@ -177,11 +177,36 @@ npm test
 npm run build
 ```
 
+## 🧹 Développement
+
+```bash
+# Installer les dépendances
+npm install
+
+# Build du projet
+npm run build
+
+# Lancer les tests
+npm run test
+
+# Linter le code
+npm run lint
+
+# Formater le code
+npm run format
+
+# Test en mode watch
+npm run test:watch
+```
+
+## 📦 Scripts disponibles
+
+- `npm run build` - Compile TypeScript vers JavaScript
+- `npm run test` - Lance tous les tests
+- `npm run lint` - Vérifie la qualité du code
+- `npm run format` - Formate le code avec Prettier
+- `npm run clean` - Nettoie le dossier de build
+
 ## 📝 Licence
 
-MIT License
-
-Copyright (c) 2024 [Votre Nom]
-Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+MIT

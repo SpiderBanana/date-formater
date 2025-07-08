@@ -8,7 +8,7 @@ const SMART_LABELS: { [locale: string]: { [key: string]: string } } = {
     nextWeek: 'La semaine prochaine',
     thisMonth: 'Ce mois-ci',
     lastMonth: 'Le mois dernier',
-    nextMonth: 'Le mois prochain'
+    nextMonth: 'Le mois prochain',
   },
   'en-US': {
     today: 'Today',
@@ -19,7 +19,7 @@ const SMART_LABELS: { [locale: string]: { [key: string]: string } } = {
     nextWeek: 'Next week',
     thisMonth: 'This month',
     lastMonth: 'Last month',
-    nextMonth: 'Next month'
+    nextMonth: 'Next month',
   },
   'es-ES': {
     today: 'Hoy',
@@ -30,7 +30,7 @@ const SMART_LABELS: { [locale: string]: { [key: string]: string } } = {
     nextWeek: 'La próxima semana',
     thisMonth: 'Este mes',
     lastMonth: 'El mes pasado',
-    nextMonth: 'El próximo mes'
+    nextMonth: 'El próximo mes',
   },
   'de-DE': {
     today: 'Heute',
@@ -41,44 +41,56 @@ const SMART_LABELS: { [locale: string]: { [key: string]: string } } = {
     nextWeek: 'Nächste Woche',
     thisMonth: 'Diesen Monat',
     lastMonth: 'Letzten Monat',
-    nextMonth: 'Nächsten Monat'
-  }
+    nextMonth: 'Nächsten Monat',
+  },
 };
 
-export function getSmartLabel(date: Date, locale: string = 'fr-FR'): string | null {
+export function getSmartLabel(
+  date: Date,
+  locale: string = 'fr-FR',
+): string | null {
   const now = new Date();
   const targetDate = new Date(date);
-  
+
   // Reset time to compare only dates
   const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
-  const compareDate = new Date(targetDate.getFullYear(), targetDate.getMonth(), targetDate.getDate());
-  
+  const compareDate = new Date(
+    targetDate.getFullYear(),
+    targetDate.getMonth(),
+    targetDate.getDate(),
+  );
+
   const diffTime = compareDate.getTime() - today.getTime();
   const diffDays = Math.round(diffTime / (1000 * 60 * 60 * 24));
-  
+
   const labels = SMART_LABELS[locale] || SMART_LABELS['fr-FR'];
-  
+
   // Exact day matches
   if (diffDays === 0) return labels.today;
   if (diffDays === -1) return labels.yesterday;
   if (diffDays === 1) return labels.tomorrow;
-  
+
   // Week comparisons
   const todayWeekStart = getWeekStart(today);
   const targetWeekStart = getWeekStart(compareDate);
-  const weekDiff = Math.round((targetWeekStart.getTime() - todayWeekStart.getTime()) / (1000 * 60 * 60 * 24 * 7));
-  
+  const weekDiff = Math.round(
+    (targetWeekStart.getTime() - todayWeekStart.getTime()) /
+      (1000 * 60 * 60 * 24 * 7),
+  );
+
   if (weekDiff === 0 && Math.abs(diffDays) <= 6) return labels.thisWeek;
   if (weekDiff === -1) return labels.lastWeek;
   if (weekDiff === 1) return labels.nextWeek;
-  
+
   // Month comparisons
-  const monthDiff = (targetDate.getFullYear() - now.getFullYear()) * 12 + (targetDate.getMonth() - now.getMonth());
-  
+  const monthDiff =
+    (targetDate.getFullYear() - now.getFullYear()) * 12 +
+    (targetDate.getMonth() - now.getMonth());
+
   if (monthDiff === 0) return labels.thisMonth;
   if (monthDiff === -1) return labels.lastMonth;
   if (monthDiff === 1) return labels.nextMonth;
-  
+
   return null;
 }
 
@@ -89,7 +101,9 @@ function getWeekStart(date: Date): Date {
   return new Date(d.setDate(diff));
 }
 
-export function getAllSmartLabels(locale: string = 'fr-FR'): { [key: string]: string } {
+export function getAllSmartLabels(locale: string = 'fr-FR'): {
+  [key: string]: string;
+} {
   return SMART_LABELS[locale] || SMART_LABELS['fr-FR'];
 }
 

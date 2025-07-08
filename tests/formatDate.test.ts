@@ -1,11 +1,11 @@
 import { describe, it, expect, beforeEach, vi } from 'vitest';
-import { 
-  formatDate, 
-  parseDate, 
-  getSmartLabel, 
-  localizeDate, 
+import {
+  formatDate,
+  parseDate,
+  getSmartLabel,
+  localizeDate,
   formatTemplate,
-  handleTimezone 
+  handleTimezone,
 } from '../src/index';
 
 describe('formatDate', () => {
@@ -17,12 +17,18 @@ describe('formatDate', () => {
   });
 
   it('should format date with custom format', () => {
-    const result = formatDate(testDate, { format: 'DD MMMM YYYY', locale: 'fr-FR' });
+    const result = formatDate(testDate, {
+      format: 'DD MMMM YYYY',
+      locale: 'fr-FR',
+    });
     expect(result).toBe('15 janvier 2024');
   });
 
   it('should format date with English locale', () => {
-    const result = formatDate(testDate, { format: 'MMMM DD, YYYY', locale: 'en-US' });
+    const result = formatDate(testDate, {
+      format: 'MMMM DD, YYYY',
+      locale: 'en-US',
+    });
     expect(result).toBe('January 15, 2024');
   });
 
@@ -34,7 +40,10 @@ describe('formatDate', () => {
 
   it('should disable smart labels', () => {
     const today = new Date();
-    const result = formatDate(today, { useSmartLabels: false, format: 'DD/MM/YYYY' });
+    const result = formatDate(today, {
+      useSmartLabels: false,
+      format: 'DD/MM/YYYY',
+    });
     expect(result).toMatch(/^\d{2}\/\d{2}\/\d{4}$/);
   });
 });

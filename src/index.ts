@@ -13,21 +13,21 @@ export interface FormatOptions {
 
 export function formatDate(
   input: string | Date | number,
-  options: FormatOptions = {}
+  options: FormatOptions = {},
 ): string {
   const {
     locale = 'fr-FR',
     timezone = 'Europe/Paris',
     format = 'DD/MM/YYYY',
-    useSmartLabels = true
+    useSmartLabels = true,
   } = options;
 
   // Parse the input date
   const parsedDate = parseDate(input);
-  
+
   // Handle timezone conversion
   const timezoneDate = handleTimezone(parsedDate, timezone);
-  
+
   // Check for smart labels first
   if (useSmartLabels) {
     const smartLabel = getSmartLabel(timezoneDate, locale);
@@ -35,10 +35,10 @@ export function formatDate(
       return smartLabel;
     }
   }
-  
+
   // Localize the date components
   const localizedComponents = localizeDate(timezoneDate, locale);
-  
+
   // Format using template
   return formatTemplate(format, localizedComponents, timezoneDate);
 }
@@ -46,7 +46,15 @@ export function formatDate(
 // Re-export all functions for advanced usage
 export { parseDate } from './parseDate';
 export { handleTimezone, getTimezoneOffset } from './timezone';
-export { getSmartLabel, getAllSmartLabels, getSupportedLocales } from './smartLabel';
-export { localizeDate, getLocalizedDayNames, getLocalizedMonthNames } from './localizer';
+export {
+  getSmartLabel,
+  getAllSmartLabels,
+  getSupportedLocales,
+} from './smartLabel';
+export {
+  localizeDate,
+  getLocalizedDayNames,
+  getLocalizedMonthNames,
+} from './localizer';
 export { formatTemplate, getAvailableTokens } from './formatTemplate';
 export type { LocalizedDateComponents } from './localizer';

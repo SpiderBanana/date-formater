@@ -1,6 +1,9 @@
-import { formatDate, getSmartLabel, localizeDate } from '../src/index';
+// Exemple d'utilisation du package publié sur npm
 
-// Exemples d'utilisation du formateur de date intelligent
+import { formatDate } from '@spiderbanana/date-smart-formatter';
+// Si tu testes localement avant publication, tu peux utiliser :
+// import { formatDate } from '../dist'; 
+// après avoir fait `npm run build`
 
 console.log('=== Exemples basiques ===');
 const now = new Date();
@@ -11,15 +14,15 @@ console.log('Demain:', formatDate(new Date(Date.now() + 86400000)));
 console.log('\n=== Formats personnalisés ===');
 console.log(
   'Format français:',
-  formatDate(now, { format: 'DD MMMM YYYY à HH:mm', locale: 'fr-FR' }),
+  formatDate(now, { format: 'DD MMMM YYYY', locale: 'fr-FR' }),
 );
 console.log(
   'Format anglais:',
-  formatDate(now, { format: 'MMMM DD, YYYY at h:mm A', locale: 'en-US' }),
+  formatDate(now, { format: 'MMMM DD, YYYY', locale: 'en-US' }),
 );
 console.log(
   'Format allemand:',
-  formatDate(now, { format: 'DD. MMMM YYYY um HH:mm', locale: 'de-DE' }),
+  formatDate(now, { format: 'DD. MMMM YYYY', locale: 'de-DE' }),
 );
 
 console.log('\n=== Sans smart labels ===');
@@ -43,24 +46,16 @@ console.log(
 );
 
 console.log('\n=== Parsing de différents formats ===');
+console.log('Date string DD/MM/YYYY:', formatDate('15/01/2024'));
 console.log('ISO string:', formatDate('2024-01-15T14:30:00Z'));
-console.log('Date française:', formatDate('15/01/2024'));
 console.log('Timestamp:', formatDate(1705334400000));
 
 console.log('\n=== Smart labels multilingues ===');
-const testDates = [
-  new Date(),
-  new Date(Date.now() - 86400000),
-  new Date(Date.now() + 86400000),
-];
+console.log('FR - Aujourd\'hui:', formatDate(new Date(), { useSmartLabels: true, locale: 'fr-FR' }));
+console.log('EN - Today:', formatDate(new Date(), { useSmartLabels: true, locale: 'en-US' }));
+console.log('DE - Heute:', formatDate(new Date(), { useSmartLabels: true, locale: 'de-DE' }));
 
-const locales = ['fr-FR', 'en-US', 'es-ES', 'de-DE'];
-
-testDates.forEach((date, i) => {
-  const labels = ["Aujourd'hui", 'Hier', 'Demain'][i];
-  console.log(`\n${labels}:`);
-  locales.forEach((locale) => {
-    const label = getSmartLabel(date, locale);
-    console.log(`  ${locale}: ${label || 'Pas de label'}`);
-  });
-});
+console.log('\n=== Templates avancés ===');
+console.log('Date complète:', formatDate(now, { format: 'dddd DD MMMM YYYY à HH:mm:ss' }));
+console.log('Format 12h:', formatDate(now, { format: 'DD/MM/YYYY h:mm A' }));
+console.log('Format court:', formatDate(now, { format: 'D/M/YY' }));

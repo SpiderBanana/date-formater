@@ -17,7 +17,9 @@
     "test:coverage": "vitest run --coverage",
     "typecheck": "tsc --noEmit",
     "dev": "tsc --watch",
-    "prepublishOnly": "npm run build && npm run test"
+    "prepublishOnly": "npm run build && npm run test",
+    "example": "npm run build && npx ts-node examples/usage.ts",
+    "example:js": "npm run build && node examples/usage.js"
   },
   "repository": {
     "type": "git",
@@ -32,5 +34,8 @@
     "rimraf": "^6.0.1",
     "typescript": "^5.0.0",
     "vitest": "^0.33.0"
+  },
+  "dependencies": {
+    "@spiderbanana/date-smart-formatter": "^1.0.0"
   }
 }

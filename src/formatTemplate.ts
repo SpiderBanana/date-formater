@@ -54,35 +54,32 @@ export function formatTemplate(
     // Unix timestamp
     X: Math.floor(date.getTime() / 1000).toString(),
     x: date.getTime().toString(),
-  }; // First, create a map of replacements with unique delimiters
-  const replacements: Array<{ pattern: string; replacement: string }> = [];
+  };
 
-  // Sort by length to handle longer patterns first
+  // Create a safe replacement system that won't cause conflicts
+  let result = template;
+
+  // Use a very unique placeholder pattern that won't appear in any date value
+  const SAFE_PREFIX = '\uE000'; // Private Use Area Unicode character
+  const SAFE_SUFFIX = '\uE001';
+
+  // Sort tokens by length (longest first) to prevent partial matches
   const sortedTokens = Object.keys(tokens).sort((a, b) => b.length - a.length);
 
-  for (const token of sortedTokens) {
-    if (tokens[token] !== undefined && template.includes(token)) {
-      replacements.push({
-        pattern: token,
-        replacement: tokens[token],
-      });
+  // First pass: replace all tokens with safe placeholders
+  const placeholderMap = new Map<string, string>();
+  for (let i = 0; i < sortedTokens.length; i++) {
+    const token = sortedTokens[i];
+    if (tokens[token] !== undefined && result.includes(token)) {
+      const placeholder = `${SAFE_PREFIX}${i}${SAFE_SUFFIX}`;
+      placeholderMap.set(placeholder, tokens[token]);
+      result = result.split(token).join(placeholder);
     }
   }
 
-  // Apply replacements one by one using a unique placeholder approach
-  let result = template;
-  const placeholderMap = new Map<string, string>();
-
-  for (let i = 0; i < replacements.length; i++) {
-    const { pattern, replacement } = replacements[i];
-    const placeholder = `__TEMP_PLACEHOLDER_${i}__`;
-    placeholderMap.set(placeholder, replacement);
-    result = result.split(pattern).join(placeholder);
-  }
-
-  // Replace all placeholders with actual values
-  for (const [placeholder, replacement] of placeholderMap) {
-    result = result.split(placeholder).join(replacement);
+  // Second pass: replace all placeholders with actual values
+  for (const [placeholder, value] of placeholderMap) {
+    result = result.split(placeholder).join(value);
   }
 
   return result;

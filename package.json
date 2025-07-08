@@ -1,5 +1,5 @@
 {
-  "name": "@votre-nom-npm/date-smart-formatter",
+  "name": "@spiderbanana/date-smart-formatter",
   "version": "1.0.0",
   "description": "📅 Un formateur de dates intelligent avec smart label et support multi-langues.",
   "main": "dist/index.js",
